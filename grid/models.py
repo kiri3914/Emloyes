@@ -34,3 +34,15 @@ class Employee(models.Model):
 class Visit(models.Model):
     date = models.DateField()
     employer = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    visited = models.BooleanField(choices=CHOICES)
+    time_start = models.TimeField(blank=True, null=True, default='00:00')
+    time_end = models.TimeField(blank=True, null=True, default='00:00')
+    reason = models.CharField(max_length=100, 
+                default='-----', blank=True, null=True)
+
+    def __str__(self):
+        return f'Сотрудник {self.employer.name}'
+    
+    class Meta:
+        ordering = ['-date']
+        
