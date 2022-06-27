@@ -25,7 +25,7 @@ class Employee(models.Model):
     slug = models.SlugField(unique=True)
 
     def get_absolute_url(self):
-        return reverse('visit', kwargs={'slug': self.slug})
+        return reverse('employee', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.name
@@ -39,10 +39,10 @@ class Visit(models.Model):
     time_end = models.TimeField(blank=True, null=True, default='00:00')
     reason = models.CharField(max_length=100, 
                 default='-----', blank=True, null=True)
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return f'Сотрудник {self.employer.name}'
     
     class Meta:
         ordering = ['-date']
-        

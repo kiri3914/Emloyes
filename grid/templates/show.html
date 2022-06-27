@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: darkcyan;
+        }
+    </style>
+</head>
+<body>
+<div class="col-md-12">
+    <h4>ВСЕ СОТРУДНИКИ</h4>
+    <div class="table-responsive">
+        <table width="100%">
+            <thead>
+            <th>ID</th>
+            <th>ИМЯ</th>
+            <th>EMAIL</th>
+            <th>КОНТАКТЫ</th>
+            </thead>
+            <tbody>
+            {% for employee in employers %}
+            <tr>
+                <td>{{ employee.id }}</td>
+                <td><a href="{{ employee.get_absolute_url }}">{{ employee.name }}</a></td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.phone }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+</body>
+</html>
+
