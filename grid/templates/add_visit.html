@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> add visit </title>
+</head>
+<body>
+    <ul>
+        <li><a href="{% url 'index' %}">  ВСЕ СОТРУДНИКИ </a></li>
+        <li><a href="{% url 'get_visit_day' %}"> ПОСЕЩЕНИЯ ЗА ДЕНЬ</a></li>
+        <li><a href="{% url 'add_visit' %}">Добавить ПОСЕЩЕНИЯ</a></li>
+    </ul>
+    
+    <h3> Добавить посещение </h3>
+
+    <form action="{% url 'add_visit' %}" method="POST">
+        {% csrf_token %}
+        
+        <table>
+            <thead>
+                <th>ДАТА</th>
+                <th>ИМЯ</th>
+                <th>ПОСЕТИЛ</th>
+                <th>ВРЕМЯ ПРИХОДА</th>
+                <th>ВРЕМЯ УХОДА</th>
+                <th>ПРИЧИНА</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="date" name="date" id="date" required></td>
+                    <td><select name="employer" id="employer">
+                        {% for i in employers %}
+                        <option value="{{ i.slug }}">{{ i.name }}</option>
+                        {% endfor %}
+                        </select></td>
+                    <td><select name="visited" id="visited">
+                        <option value="True">Посетил</option>
+                        <option value="False">Отсутствовал</option>
+                        </select></td>
+                    <td><input type="time" name="time_start" id="time_start" required></td>
+                    <td><input type="time" name="time_end" id="time_end" required></td>
+                    <td><input type="text" name="reason" id="reason" placeholder="Причина"></td>
+                </tr>
+
+            </tbody>
+
+        </table>
+        <button>Добавить посещения</button>
+    </form>
+</body>
+</html>

@@ -1,32 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <style>
-        body{
-            background-color: darkcyan;
-        }
-    </style>
 </head>
+
 <body>
     <ul>
         <li><a href="{% url 'index' %}">  ВСЕ СОТРУДНИКИ </a></li>
         <li><a href="{% url 'get_visit_day' %}"> ПОСЕЩЕНИЯ ЗА ДЕНЬ</a></li>
         <li><a href="{% url 'add_visit' %}">Добавить ПОСЕЩЕНИЯ</a></li>
     </ul>
-    <h4>СОТРУДНИК</h4>
-    <h4>Фото</h4>
-    <img src="{{ employee.image.url }}" height="255">
-    <hr>
-    <h4>{{ employee.name }}</h4><hr>
-    <h4>{{ employee.position.title }}</h4><hr>
-    
-    <h4>{{ employee.email }}</h4><hr>
-    <h4>{{ employee.phone }}</h4><hr>
-    <h4>{{ employee.stack }}</h4><hr>
+    <form action="{% url 'get_visit_day' %}" method="POST">
+        {% csrf_token %}
+        <input type="date" name="day" id="day" placeholder="Дата" required>
+        <button>ПРОВЕРИТЬ</button>
+    </form>
 
-
+    <h2> {{ day }} </h2>
 
     <table>
         <thead>
@@ -36,7 +27,6 @@
             <th>ВРЕМЯ УХОДА</th>
             <th>ПРИЧИНА</th>
         </thead>
-        
         <tbody>
             {% for visit in visits %}
             <tr>
@@ -54,7 +44,8 @@
             </tr>
             {% endfor %}
         </tbody>
-    </table>
 
+
+    </table>
 </body>
 </html>
