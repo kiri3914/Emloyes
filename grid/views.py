@@ -30,7 +30,7 @@ def get_visit_day(request):
     if request.method == 'POST':
         day = request.POST['day']
         visits = Visit.objects.filter(date=day)
-    
+        
     context = {
         'visits': visits,
         'day': day
